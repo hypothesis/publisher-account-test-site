@@ -1,7 +1,14 @@
 import datetime
 import json
+from urlparse import urlparse
+
 import jwt
 import requests
+
+
+def _extract_domain(url):
+    host_and_port = urlparse(url).netloc
+    return host_and_port.split(':')[0]
 
 
 class HypothesisClient(object):
@@ -40,7 +47,7 @@ class HypothesisClient(object):
         """
         now = datetime.datetime.utcnow()
         claims = {
-            'aud': self.service,
+            'aud': _extract_domain(self.service),
             'iss': self.client_id,
             'sub': 'acct:{}@{}'.format(username, self.authority),
             'nbf': now,
