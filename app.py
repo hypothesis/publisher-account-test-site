@@ -5,10 +5,11 @@ from flask import Flask, redirect, render_template, request, session, url_for
 
 app = Flask(__name__)
 app.secret_key = 'notverysecret'
+hypothesis_service = os.environ.get('HYPOTHESIS_SERVICE', 'http://localhost:5000')
 hyp_client = HypothesisClient(authority=os.environ['HYPOTHESIS_AUTHORITY'],
                               client_id=os.environ['HYPOTHESIS_CLIENT_ID'],
                               client_secret=os.environ['HYPOTHESIS_CLIENT_SECRET'],
-                              service=os.environ.get('HYPOTHESIS_SERVICE', 'http://localhost:5000'))
+                              service=hypothesis_service)
 
 
 @app.route('/login', methods=['POST'])
@@ -37,4 +38,5 @@ def index():
     username = session.get('username', None)
     return render_template('article.html',
                            grant_token=hyp_client.grant_token(username=username),
-                           username=username)
+                           username=username,
+                           service_url=hypothesis_service)
