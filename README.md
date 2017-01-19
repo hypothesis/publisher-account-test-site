@@ -9,7 +9,13 @@ Publishers who just want to add the Hypothesis client to their pages and allow u
 
 ## Setup
 
-First, you will need to create a publisher account on the Hypothesis service [TODO: Add information on how to do this].
+First, you will need to create a publisher account on the Hypothesis service.
+
+In [Hypothesis development environments](http://h.readthedocs.io/en/latest/developing/install/), you can do this using the `hypothesis publisher` CLI command:
+
+```sh
+./bin/hypothesis publisher add --name Partner --authority partner.org
+```
 
 This will give you a client ID and secret which can be used to create accounts
 on the Hypothesis service via the API, and generate _grant tokens_ which can be
@@ -25,9 +31,13 @@ export HYPOTHESIS_CLIENT_SECRET=$CLIENT_SECRET
 make run
 ```
 
-Once the app is running, go to [http://localhost:5050](http://localhost:5050) to view the example
-page.  Enter a username and click "Sign up" to register an account on the
-Hypothesis service, associated with your publisher account, and "Login" to log
+Once the web app is running:
+
+1. Go to [http://localhost:5050](http://localhost:5050) to view the example
+page.
+2. Enter a username and click "Sign up" to register an account on the
+Hypothesis service, associated with your publisher account.
+3. Click "Login" to log
 in to the example site.
 
 After logging in, you can annotate content in the article by selecting text and clicking the "Annotate" or "Highlight" buttons that appear.
