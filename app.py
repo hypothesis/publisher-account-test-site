@@ -36,7 +36,12 @@ def signup():
 @app.route('/')
 def index():
     username = session.get('username', None)
+    grant_token = None
+
+    if username:
+        grant_token = hyp_client.grant_token(username=username)
+
     return render_template('article.html',
-                           grant_token=hyp_client.grant_token(username=username),
+                           grant_token=grant_token,
                            username=username,
                            service_url=hypothesis_service)
