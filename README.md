@@ -9,15 +9,31 @@ Publishers who just want to add the Hypothesis client to their pages and allow u
 
 ## Setup
 
-First, you will need to create a publisher account on the Hypothesis service.
+First, you will need to create a couple of things on the Hypothesis service:
 
-In [Hypothesis development environments](http://h.readthedocs.io/en/latest/developing/install/), you can do this using the `hypothesis publisher` CLI command:
+1. A set of credentials (an "authclient") for managing annotations and users
+   associated with your domain.
+
+2. A group associated with your domain to which users can post annotations.
+   Annotations from this group will be displayed when the Hypothesis client
+   loads on your pages.
+
+In [Hypothesis development environments](http://h.readthedocs.io/en/latest/developing/install/), you can do this using the `hypothesis` CLI tool:
 
 ```sh
-./bin/hypothesis publisher add --name Partner --authority partner.org
+# 1. Create an OAuth client which can manage annotations and users belonging
+# to partner.org
+./bin/hypothesis --dev authclient add --name Partner --authority partner.org
+
+# 2. Create an admin user for partner.org. This is needed because groups must
+# have a creator.
+./bin/hypothesis --dev user add --authority partner.org --username admin --email admin@localhost --password secret
+
+# 3. Create the main group for annotations on partner.org
+./bin/hypothesis --dev groups add-publisher-group --authority partner.org --name Partner --creator admin
 ```
 
-This will give you a client ID and secret which can be used to create accounts
+Step 1 will give you a client ID and secret which can be used to create accounts
 on the Hypothesis service via the API, and generate _grant tokens_ which can be
 used to identify the logged-in user to the Hypothesis client.
 
