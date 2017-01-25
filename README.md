@@ -51,10 +51,9 @@ Once the web app is running:
 
 1. Go to [http://localhost:5050](http://localhost:5050) to view the example
 page.
-2. Enter a username and click "Sign up" to register an account on the
-Hypothesis service, associated with your publisher account.
-3. Click "Login" to log
-in to the example site.
+2. Enter a username and click "Sign up" to create an account on the publisher site.
+The first time you log in with a particular username, a corresponding account will
+be created on the Hypothesis service.
 
 After logging in, you can annotate content in the article by selecting text and clicking the "Annotate" or "Highlight" buttons that appear.
 

@@ -1,7 +1,9 @@
 import os
 
-from hypothesis import HypothesisClient
 from flask import Flask, redirect, render_template, request, session, url_for
+from requests.exceptions import HTTPError
+
+from hypothesis import HypothesisClient
 
 app = Flask(__name__)
 app.secret_key = 'notverysecret'
@@ -15,6 +17,16 @@ hyp_client = HypothesisClient(authority=os.environ['HYPOTHESIS_AUTHORITY'],
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
+    email = '{}@partner.org'.format(username)
+    try:
+        hyp_client.create_account(username, email=email)
+    except HTTPError as ex:
+        # FIXME: Make the service respond with an appropriate status code and
+        # machine-readable error if the user account already exists
+        already_exists_err = 'user with email address {} already exists'.format(email)
+        if already_exists_err not in ex.response.content:
+            raise ex
+
     session['username'] = username
     return redirect(url_for('index'))
 
@@ -22,14 +34,6 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('index'))
-
-
-@app.route('/signup', methods=['POST'])
-def signup():
-    username = request.form['username']
-    hyp_client.create_account(username, email='{}@partner.org'.format(username))
-    session['username'] = username
     return redirect(url_for('index'))
 
 
