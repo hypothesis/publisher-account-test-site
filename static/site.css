@@ -56,3 +56,14 @@ a {
   font-size: 24px;
 }
 
+.article__ann-counter {
+  border: none;
+  border-radius: 3px;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
