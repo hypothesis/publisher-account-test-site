@@ -33,8 +33,12 @@ class HypothesisClient(object):
                 'email': email,
                 }
 
-        rsp = requests.post('{}/api/users'.format(self.service),
-                            data=json.dumps(data), auth=auth)
+        rsp = requests.post(
+            '{}/api/users'.format(self.service),
+            data=json.dumps(data),
+            auth=auth,
+            # Don't verify SSL certificates if posting to localhost.
+            verify=urlparse(self.service).hostname != 'localhost')
         rsp.raise_for_status()
 
     def grant_token(self, username):
