@@ -41,6 +41,7 @@ Once you have a client ID and secret, you can run the example site as follows:
 
 ```
 pip install -r requirements.txt
+export HYPOTHESIS_SERVICE="http://127.0.0.1:5000" # Point to the local H service
 export HYPOTHESIS_AUTHORITY=$AUTHORITY  # Domain name used when registering publisher account
 export HYPOTHESIS_CLIENT_ID=$CLIENT_ID
 export HYPOTHESIS_CLIENT_SECRET=$CLIENT_SECRET
