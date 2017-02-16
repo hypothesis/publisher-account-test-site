@@ -15,10 +15,9 @@
           <b>Hello {{ username }}</b>. <a href="{{ url_for('logout') }}">Log out</a>
         </span>
         {% else %}
-        <form method="POST" action="/login">
-          <input type="text" name="username" placeholder="Username">
-          <button>Sign up or Log in</button>
-        </form>
+        <a href="/login">Login</a>
+
+
         {% endif %}
       </div>
     </header>

@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, Response, session, url_for
+from flask.views import MethodView
 from requests.exceptions import HTTPError
 
 from hypothesis import HypothesisClient
@@ -14,21 +15,27 @@ hyp_client = HypothesisClient(authority=os.environ['HYPOTHESIS_AUTHORITY'],
                               service=hypothesis_service)
 
 
-@app.route('/login', methods=['POST'])
-def login():
-    username = request.form['username']
-    email = '{}@partner.org'.format(username)
-    try:
-        hyp_client.create_account(username, email=email)
-    except HTTPError as ex:
-        # FIXME: Make the service respond with an appropriate status code and
-        # machine-readable error if the user account already exists
-        already_exists_err = 'user with email address {} already exists'.format(email)
-        if already_exists_err not in ex.response.content:
-            raise ex
+class LoginPage(MethodView):
+    def get(self):
+        return render_template('login.html')
 
-    session['username'] = username
-    return redirect(url_for('index'))
+    def post(self):
+        username = request.form['username']
+        email = '{}@partner.org'.format(username)
+        try:
+            hyp_client.create_account(username, email=email)
+        except HTTPError as ex:
+            # FIXME: Make the service respond with an appropriate status code and
+            # machine-readable error if the user account already exists
+            already_exists_err = 'user with email address {} already exists'.format(email)
+            if already_exists_err not in ex.response.content:
+                raise ex
+
+        session['username'] = username
+        return redirect(url_for('index'))
+
+
+app.add_url_rule('/login', view_func=LoginPage.as_view('login'))
 
 
 @app.route('/logout')
