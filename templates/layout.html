@@ -1,0 +1,41 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %} - Partner.org</title>
+  <link rel="stylesheet" href="/static/site.css">
+</head>
+<body>
+  <div class="content">
+    <header class="header">
+      <h1 class="header__title">Partner.org</h1>
+      <div class="stretcher"></div>
+      {% if request.endpoint != 'login' %}
+        <div class="header__user">
+          {% if username %}
+            <span>
+              <b>Hello {{ username }}</b>.
+              <a href="{{ url_for('logout') }}">Log out</a>
+            </span>
+          {% else %}
+            <a href="/login" class="js-popup-login">Login</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </header>
+
+    <main class="article">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <script>
+    {% if grant_token %}
+      var hypothesisGrantToken = "{{ grant_token }}";
+    {% else %}
+      var hypothesisGrantToken = null;
+    {% endif %}
+  </script>
+  <script src="/static/site.js"></script>
+  <script src="{{ service_url }}/embed.js" async defer></script>
+</body>
+</html>
