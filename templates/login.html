@@ -1,12 +1,10 @@
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-</head>
-<body>
-  <form method="POST">
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <form method="POST" class="login-form">
     <input type="text" name="username" placeholder="Username">
     <button>Sign up or Log in</button>
   </form>
-</body>
-</html>
+{% endblock %}
