@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <form method="POST" class="login-form js-login-form">
+    <input type="text" name="username" placeholder="Username">
+    <button>Sign up or Log in</button>
+  </form>
+
+  <script data-username="{{ username }}">
+    if (document.currentScript.dataset.username) {
+      window.opener.location.reload();
+      window.close();
+    }
+  </script>
+{% endblock %}

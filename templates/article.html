@@ -1,91 +1,61 @@
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>As we may think - Partner.org</title>
-  <link rel="stylesheet" href="/static/site.css">
-</head>
-<body>
-  <div class="content">
-    <header class="header">
-      <h1 class="header__title">Partner.org</h1>
-      <div class="stretcher"></div>
-      <div class="header__user">
-        {% if username %}
-        <span>
-          <b>Hello {{ username }}</b>. <a href="{{ url_for('logout') }}">Log out</a>
-        </span>
-        {% else %}
-        <form method="POST" action="/login">
-          <input type="text" name="username" placeholder="Username">
-          <button>Sign up or Log in</button>
-        </form>
-        {% endif %}
-      </div>
-    </header>
-    <main class="article">
-      <h2 class="article__title">As we may think</h2>
-      <button class="article__ann-counter"
-              data-hypothesis-trigger
-              title="Show annotations on this article">
-        <span data-hypothesis-annotation-count>...</span> annotations
-      </button>
-      <p><i>As Director of the Office of Scientific Research and Development, Dr.
-      Vannevar Bush has coordinated the activities of some six thousand
-      leading American scientists in the application of science to warfare.
-      In this significant article he holds up an incentive for scientists
-      when the fighting has ceased.  He urges that men of science should
-      then turn to the massive task of making more accessible our
-      bewildering store of knowledge.  For many years inventions have
-      extended man's physical powers rather than the powers of his mind.
-      Trip hammers that multiply the fists, microscopes that sharpen the
-      eye, and engines of destruction and detection are new results, but the
-      end results, of modern science.  Now, says Dr. Bush, instruments are
-      at hand which, if properly developed, will give man access to and
-      command over the inherited knowledge of the ages.  The perfection of
-      these pacific instruments should be the first objective of our
-      scientists as they emerge from their war work.  Like Emerson's famous
-      address of 1837 on ``The American Scholar,'' this paper by Dr. Bush
-      calls for a new relationship between thinking man and the sum of our
-      knowledge. - The Editor</i></p>
+{% extends "layout.html" %}
 
-      <p>
-      This has not been a scientist's war; it has been a war in which all
-      have had a part.  The scientists, burying their old professional
-      competition in the demand of a common cause, have shared greatly and
-      learned much.  It has been exhilarating to work in effective
-      partnership.  Now, for many, this appears to be approaching an end.
-      What are the scientists to do next?
-      </p>
+{% block title %}As we may think{% endblock %}
 
-      <p>
-      For the biologists, and particularly for the medical scientists, there
-      can be little indecision, for their war work has hardly required them
-      to leave the old paths.  Many indeed have been able to carry on their
-      war research in their familiar peacetime laboratories.  Their
-      objectives remain much the same.
-      </p>
+{% block content %}
+<h2 class="article__title">{{ self.title() }}</h2>
 
-      <p>
-      It is the physicists who have been thrown most violently off stride,
-      who have left academic pursuits for the making of strange destructive
-      gadgets, who have had to devise new methods for their unanticipated
-      assignments.  They have done their part on the devices that made it
-      possible to turn back the enemy.  They have worked in combined effort
-      with the physicists of our allies.  They have felt within themselves
-      the stir of achievement.  They have been part of a great team.  Now,
-      as peace approaches, one asks where they will find objectives worthy
-      of their best.
-      </p>
-    </main>
-  </div>
-  <script>
-  {% if grant_token %}
-  var hypothesisGrantToken = "{{ grant_token }}";
-  {% else %}
-  var hypothesisGrantToken = null;
-  {% endif %}
-  </script>
-  <script src="/static/site.js"></script>
-  <script src="{{ service_url }}/embed.js" async defer></script>
-</body>
-</html>
+  <button class="article__ann-counter"
+          data-hypothesis-trigger
+          title="Show annotations on this article">
+    <span data-hypothesis-annotation-count>...</span> annotations
+  </button>
+
+  <p><i>As Director of the Office of Scientific Research and Development, Dr.
+  Vannevar Bush has coordinated the activities of some six thousand
+  leading American scientists in the application of science to warfare.
+  In this significant article he holds up an incentive for scientists
+  when the fighting has ceased.  He urges that men of science should
+  then turn to the massive task of making more accessible our
+  bewildering store of knowledge.  For many years inventions have
+  extended man's physical powers rather than the powers of his mind.
+  Trip hammers that multiply the fists, microscopes that sharpen the
+  eye, and engines of destruction and detection are new results, but the
+  end results, of modern science.  Now, says Dr. Bush, instruments are
+  at hand which, if properly developed, will give man access to and
+  command over the inherited knowledge of the ages.  The perfection of
+  these pacific instruments should be the first objective of our
+  scientists as they emerge from their war work.  Like Emerson's famous
+  address of 1837 on ``The American Scholar,'' this paper by Dr. Bush
+  calls for a new relationship between thinking man and the sum of our
+  knowledge. - The Editor</i></p>
+
+  <p>
+  This has not been a scientist's war; it has been a war in which all
+  have had a part.  The scientists, burying their old professional
+  competition in the demand of a common cause, have shared greatly and
+  learned much.  It has been exhilarating to work in effective
+  partnership.  Now, for many, this appears to be approaching an end.
+  What are the scientists to do next?
+  </p>
+
+  <p>
+  For the biologists, and particularly for the medical scientists, there
+  can be little indecision, for their war work has hardly required them
+  to leave the old paths.  Many indeed have been able to carry on their
+  war research in their familiar peacetime laboratories.  Their
+  objectives remain much the same.
+  </p>
+
+  <p>
+  It is the physicists who have been thrown most violently off stride,
+  who have left academic pursuits for the making of strange destructive
+  gadgets, who have had to devise new methods for their unanticipated
+  assignments.  They have done their part on the devices that made it
+  possible to turn back the enemy.  They have worked in combined effort
+  with the physicists of our allies.  They have felt within themselves
+  the stir of achievement.  They have been part of a great team.  Now,
+  as peace approaches, one asks where they will find objectives worthy
+  of their best.
+  </p>
+{% endblock %}
