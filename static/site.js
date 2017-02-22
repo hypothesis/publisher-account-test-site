@@ -18,6 +18,7 @@
         authority: 'partner.org',
         grantToken: hypothesisGrantToken,
       }],
+      onLogin: openLoginPopup,
     };
   };
 
