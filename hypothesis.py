@@ -55,6 +55,6 @@ class HypothesisClient(object):
             'iss': self.client_id,
             'sub': 'acct:{}@{}'.format(username, self.authority),
             'nbf': now,
-            'exp': now + datetime.timedelta(minutes=30),
+            'exp': now + datetime.timedelta(minutes=5),
         }
         return jwt.encode(claims, self.client_secret, algorithm='HS256')
