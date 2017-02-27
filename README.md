@@ -1,7 +1,13 @@
-# Hypothesis Publisher Account Demo Site
+# Hypothesis Publisher Account Test Site
 
-This is an example application showing how content publishers can use
-[Hypothesis](https://hypothes.is)' Publisher Account feature to add annotation functionality to their pages which is integrated with their existing account system.
+This is a web app to test how content publishers can use
+[Hypothesis](https://hypothes.is)' Publisher Account feature to add annotation
+functionality to their pages which is integrated with their existing account
+system.
+
+Note that this is only intended for us at Hypothesis to test the integration
+functionality internally, it's not intended as a demo or example for
+publishers.
 
 Publishers who just want to add the Hypothesis client to their pages and allow users to annotate using Hypothesis accounts can simply [embed Hypothesis](https://hypothes.is/for-publishers/).
 
@@ -37,7 +43,7 @@ Step 1 will give you a client ID and secret which can be used to create accounts
 on the Hypothesis service via the API, and generate _grant tokens_ which can be
 used to identify the logged-in user to the Hypothesis client.
 
-Once you have a client ID and secret, you can run the example site as follows:
+Once you have a client ID and secret, you can run the test site as follows:
 
 ```
 pip install -r requirements.txt
@@ -50,8 +56,7 @@ make run
 
 Once the web app is running:
 
-1. Go to [http://localhost:5050](http://localhost:5050) to view the example
-page.
+1. Go to [http://localhost:5050](http://localhost:5050) to view the test page.
 2. Enter a username and click "Sign up" to create an account on the publisher site.
 The first time you log in with a particular username, a corresponding account will
 be created on the Hypothesis service.
@@ -60,6 +65,6 @@ After logging in, you can annotate content in the article by selecting text and 
 
 ## How it works
 
-When you "Sign up" on the example site, a request is made to the [Create user API](http://h.readthedocs.io/en/latest/api/#operation/createUser) to create an account with the given username within the namespace of your publisher account. When the page loads, it creates a [JWT token](https://jwt.io/) for the logged-in user, using the client ID and secret, and embeds it in the generated page.
+When you "Sign up" on the test site, a request is made to the [Create user API](http://h.readthedocs.io/en/latest/api/#operation/createUser) to create an account with the given username within the namespace of your publisher account. When the page loads, it creates a [JWT token](https://jwt.io/) for the logged-in user, using the client ID and secret, and embeds it in the generated page.
 
 When the Hypothesis client runs, it calls the `window.hypothesisConfig()` function to fetch the configuration for the annotation client and reads the grant token. It then exchanges this grant token for an access token which allows the client to create annotations using this username.
