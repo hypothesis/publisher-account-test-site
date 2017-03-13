@@ -6,9 +6,7 @@ endif
 
 .PHONY: run
 run:
-	export FLASK_APP=app.py; \
-	export FLASK_DEBUG=1; \
-	flask run --port $(FLASK_PORT) --host $(FLASK_HOST)
+	./app.py
 
 .PHONY: lint
 lint:
