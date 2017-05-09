@@ -1,16 +1,18 @@
 (function () {
-  const openLoginPopup = function openLoginPopup() {
+  const openPopup = (url) => {
     const width  = 400;
     const height = 400;
     const left   = window.screenX + ((window.innerWidth / 2)  - (width  / 2));
     const top    = window.screenY + ((window.innerHeight / 2) - (height / 2));
 
     window.open(
-      '/login',
+      url,
       'loginWindow',
       `left=${left},top=${top},width=${width},height=${height}`
     );
   };
+
+  const openLoginPopup = () => openPopup('/login');
 
   window.hypothesisConfig = function () {
     return {
@@ -19,6 +21,7 @@
         grantToken: hypothesisGrantToken,
         icon: 'https://openclipart.org/download/272629/sihouette-animaux-10.svg',
         onLoginRequest: openLoginPopup,
+        onSignupRequest: () => openPopup('/signup'),
       }],
     };
   };

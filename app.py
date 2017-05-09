@@ -41,6 +41,7 @@ class LoginPage(MethodView):
 
 
 app.add_url_rule('/login', view_func=LoginPage.as_view('login'))
+app.add_url_rule('/signup', view_func=LoginPage.as_view('signup'))
 
 
 @app.route('/logout')
