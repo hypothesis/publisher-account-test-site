@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 
 from flask import Flask, redirect, render_template, request, session, url_for
@@ -64,3 +65,15 @@ def index():
                            grant_token=grant_token,
                            username=username,
                            service_url=hypothesis_service)
+
+
+if __name__ == '__main__':
+    def ssl_context():
+        if 'FLASK_SSL' in os.environ:
+            return 'adhoc'
+
+    app.run(
+        ssl_context=ssl_context(),
+        host=os.environ.get('FLASK_HOST', '127.0.0.1'),
+        port=os.environ.get('FLASK_PORT', 5050),
+        debug=True)
