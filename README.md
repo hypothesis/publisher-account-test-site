@@ -48,7 +48,7 @@ Once you have a client ID and secret, you can run the test site as follows:
 ```
 pip install -r requirements.txt
 export HYPOTHESIS_SERVICE="http://localhost:5000" # Point to the local H service
-export HYPOTHESIS_AUTHORITY=$AUTHORITY  # Domain name used when registering publisher account
+export HYPOTHESIS_AUTHORITY=partner.org  # Domain name used when registering publisher account
 export HYPOTHESIS_CLIENT_ID=$CLIENT_ID
 export HYPOTHESIS_CLIENT_SECRET=$CLIENT_SECRET
 make run
