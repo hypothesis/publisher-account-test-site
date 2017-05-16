@@ -32,8 +32,10 @@ class LoginPage(MethodView):
         except HTTPError as ex:
             # FIXME: Make the service respond with an appropriate status code and
             # machine-readable error if the user account already exists
-            already_exists_err = 'user with email address {} already exists'.format(email)
-            if already_exists_err not in ex.response.content:
+            email_err = 'user with email address {} already exists'.format(email)
+            username_err = 'user with username {} already exists'.format(username)
+            content = ex.response.content
+            if email_err not in content and username_err not in content:
                 raise ex
 
         session['username'] = username
