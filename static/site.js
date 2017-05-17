@@ -21,6 +21,7 @@
         grantToken: hypothesisGrantToken,
         icon: 'https://openclipart.org/download/272629/sihouette-animaux-10.svg',
         onLoginRequest: openLoginPopup,
+        onLogoutRequest: () => window.location = 'logout',
         onSignupRequest: () => openPopup('/signup'),
       }],
     };
