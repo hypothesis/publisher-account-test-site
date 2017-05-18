@@ -46,6 +46,23 @@ app.add_url_rule('/login', view_func=LoginPage.as_view('login'))
 app.add_url_rule('/signup', view_func=LoginPage.as_view('signup'))
 
 
+def render_template_with_context(template):
+    """Return the given template rendered with the standard context."""
+    username = session.get('username', None)
+
+    if username:
+        grant_token = hyp_client.grant_token(username=username)
+    else:
+        grant_token = None
+
+    return render_template(
+        template,
+        grant_token=grant_token,
+        username=username,
+        service_url=hypothesis_service,
+    )
+
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)
@@ -54,13 +71,13 @@ def logout():
 
 @app.route('/')
 def index():
-    username = session.get('username', None)
-    grant_token = None
+    return render_template_with_context('article.html')
 
-    if username:
-        grant_token = hyp_client.grant_token(username=username)
+@app.route('/help')
+def help():
+    return render_template_with_context('help.html')
 
-    return render_template('article.html',
-                           grant_token=grant_token,
-                           username=username,
-                           service_url=hypothesis_service)
+
+@app.route('/profile')
+def profile():
+    return render_template_with_context('profile.html')
