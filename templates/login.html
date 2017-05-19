@@ -7,7 +7,9 @@
     <input type="text" name="username" placeholder="Username">
     <button>Sign up or Log in</button>
   </form>
+{% endblock %}
 
+{% block script %}
   <script data-username="{{ username }}">
     if (document.currentScript.dataset.username) {
       window.opener.location.reload();

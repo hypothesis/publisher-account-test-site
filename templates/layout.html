@@ -28,6 +28,16 @@
     </main>
   </div>
 
-  {% block script %}{% endblock %}
+  {% block script %}
+  <script>
+    {% if grant_token %}
+      var hypothesisGrantToken = "{{ grant_token }}";
+    {% else %}
+      var hypothesisGrantToken = null;
+    {% endif %}
+  </script>
+  <script src="/static/site.js"></script>
+  <script src="{{ service_url }}/embed.js" async></script>
+  {% endblock %}
 </body>
 </html>
