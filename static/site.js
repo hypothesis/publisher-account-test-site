@@ -16,6 +16,19 @@
 
   window.hypothesisConfig = function () {
     return {
+      branding: {
+        // Match the body's background color.
+        appBackgroundColor: '#ddd',
+
+        // Match the header's background and foreground colors.
+        accentColor: '#444',
+        ctaBackgroundColor: '#444',
+        ctaTextColor: 'white',
+
+        // Match the body text of the article.
+        annotationFontFamily: 'serif',
+        selectionFontFamily: 'serif',
+      },
       services: [{
         authority: 'partner.org',
         grantToken: hypothesisGrantToken,
