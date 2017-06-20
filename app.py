@@ -55,9 +55,12 @@ def render_template_with_context(template):
     else:
         grant_token = None
 
+    hypothesis_api_url=hypothesis_service+'/api/'
+
     return render_template(
         template,
         grant_token=grant_token,
+        hypothesis_api_url=hypothesis_api_url,
         username=username,
         service_url=hypothesis_service,
     )
