@@ -30,6 +30,9 @@
 
   {% block script %}
   <script>
+    {% autoescape false %}
+      var hypothesisApiUrl = "{{ hypothesis_api_url }}";
+    {% endautoescape %}
     {% if grant_token %}
       var hypothesisGrantToken = "{{ grant_token }}";
     {% else %}
