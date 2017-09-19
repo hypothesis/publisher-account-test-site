@@ -17,8 +17,11 @@ Publishers who just want to add the Hypothesis client to their pages and allow u
 
 First, you will need to create a couple of things on the Hypothesis service:
 
-1. A set of credentials (an "authclient") for managing annotations and users
-   associated with your domain.
+1. A set of credentials (a "client credentials" OAuth client) for managing users
+   and groups associated with your domain.
+
+2. A set of credentials (a "JWT bearer" OAuth client) for creating signed tokens that
+   the Hypothesis client can use to automatically log in as a particular user.
 
 2. A group associated with your domain to which users can post annotations.
    Annotations from this group will be displayed when the Hypothesis client
@@ -26,22 +29,28 @@ First, you will need to create a couple of things on the Hypothesis service:
 
 In [Hypothesis development environments](http://h.readthedocs.io/en/latest/developing/install/), you can do this using the `hypothesis` CLI tool:
 
-```sh
-# 1. Create an OAuth client which can manage annotations and users belonging
-# to partner.org
-./bin/hypothesis --dev authclient add --name Partner --authority partner.org
+1. Go to http://localhost:5000/admin/oauthclients and create a new OAuth client
+   with the type set to "client_credentials" and the authority set to "partner.org".
 
-# 2. Create an admin user for partner.org. This is needed because groups must
-# have a creator.
-./bin/hypothesis --dev user add --authority partner.org --username admin --email admin@localhost --password secret
+   This will give you a client ID and secret which can be used to create
+   accounts on the Hypothesis service via the API.
 
-# 3. Create the main group for annotations on partner.org
-./bin/hypothesis --dev groups add-publisher-group --authority partner.org --name Partner --creator admin
-```
+2. Create another OAuth client on the same page with the type set to
+   "jwt_bearer" and the authority also set to "partner.org"
 
-Step 1 will give you a client ID and secret which can be used to create accounts
-on the Hypothesis service via the API, and generate _grant tokens_ which can be
-used to identify the logged-in user to the Hypothesis client.
+   This will give you a client ID and secret which can be used to generate
+   _grant tokens_ which can be used to identify the logged-in user to the
+   Hypothesis client.
+
+3. Create an admin user for partner.org:
+   ```sh
+   ./bin/hypothesis --dev user add --authority partner.org --username admin --email admin@localhost --password secret
+   ```
+
+4. Create the main group for annotations on partner.org
+   ```sh
+   ./bin/hypothesis --dev groups add-publisher-group --authority partner.org --name Partner --creator admin
+   ```
 
 Once you have a client ID and secret, you can run the test site as follows:
 
@@ -51,6 +60,8 @@ export HYPOTHESIS_SERVICE="http://localhost:5000" # Point to the local H service
 export HYPOTHESIS_AUTHORITY=partner.org  # Domain name used when registering publisher account
 export HYPOTHESIS_CLIENT_ID=$CLIENT_ID
 export HYPOTHESIS_CLIENT_SECRET=$CLIENT_SECRET
+export HYPOTHESIS_JWT_CLIENT_ID=$JWT_CLIENT_ID
+export HYPOTHESIS_JWT_CLIENT_SECRET=$JWT_CLIENT_SECRET
 make run
 ```
 
