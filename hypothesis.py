@@ -19,7 +19,7 @@ class HypothesisClient(object):
         self.client_secret = client_secret
         self.service = service
 
-    def create_account(self, username, email):
+    def create_account(self, username, email, display_name=None):
         """
         Create an account on the Hypothesis service.
 
@@ -31,6 +31,7 @@ class HypothesisClient(object):
         data = {'authority': self.authority,
                 'username': username,
                 'email': email,
+                'display_name': display_name,
                 }
 
         rsp = requests.post(

@@ -25,10 +25,12 @@ class LoginPage(MethodView):
         return render_template('login.html', **context)
 
     def post(self):
+        display_name = request.form['display_name']
         username = request.form['username']
         email = '{}@partner.org'.format(username)
         try:
-            hyp_client.create_account(username, email=email)
+            hyp_client.create_account(username, email=email,
+                                      display_name=display_name)
         except HTTPError as ex:
             # FIXME: Make the service respond with an appropriate status code and
             # machine-readable error if the user account already exists
