@@ -12,6 +12,8 @@ hypothesis_service = os.environ.get('HYPOTHESIS_SERVICE', 'http://localhost:5000
 hyp_client = HypothesisClient(authority=os.environ['HYPOTHESIS_AUTHORITY'],
                               client_id=os.environ['HYPOTHESIS_CLIENT_ID'],
                               client_secret=os.environ['HYPOTHESIS_CLIENT_SECRET'],
+                              jwt_client_id=os.environ['HYPOTHESIS_JWT_CLIENT_ID'],
+                              jwt_client_secret=os.environ['HYPOTHESIS_JWT_CLIENT_SECRET'],
                               service=hypothesis_service)
 
 
@@ -25,10 +27,12 @@ class LoginPage(MethodView):
         return render_template('login.html', **context)
 
     def post(self):
+        display_name = request.form['display_name']
         username = request.form['username']
         email = '{}@partner.org'.format(username)
         try:
-            hyp_client.create_account(username, email=email)
+            hyp_client.create_account(username, email=email,
+                                      display_name=display_name)
         except HTTPError as ex:
             # FIXME: Make the service respond with an appropriate status code and
             # machine-readable error if the user account already exists

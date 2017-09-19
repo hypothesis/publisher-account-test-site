@@ -13,13 +13,16 @@ def _extract_domain(url):
 
 class HypothesisClient(object):
 
-    def __init__(self, client_id, client_secret, authority, service):
+    def __init__(self, client_id, client_secret, jwt_client_id,
+                 jwt_client_secret, authority, service):
         self.authority = authority
         self.client_id = client_id
         self.client_secret = client_secret
+        self.jwt_client_id = jwt_client_id
+        self.jwt_client_secret = jwt_client_secret
         self.service = service
 
-    def create_account(self, username, email):
+    def create_account(self, username, email, display_name=None):
         """
         Create an account on the Hypothesis service.
 
@@ -31,6 +34,7 @@ class HypothesisClient(object):
         data = {'authority': self.authority,
                 'username': username,
                 'email': email,
+                'display_name': display_name,
                 }
 
         rsp = requests.post(
@@ -52,9 +56,9 @@ class HypothesisClient(object):
         now = datetime.datetime.utcnow()
         claims = {
             'aud': _extract_domain(self.service),
-            'iss': self.client_id,
+            'iss': self.jwt_client_id,
             'sub': 'acct:{}@{}'.format(username, self.authority),
             'nbf': now,
             'exp': now + datetime.timedelta(minutes=5),
         }
-        return jwt.encode(claims, self.client_secret, algorithm='HS256')
+        return jwt.encode(claims, self.jwt_client_secret, algorithm='HS256')
