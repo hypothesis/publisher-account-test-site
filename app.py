@@ -42,6 +42,9 @@ class LoginPage(MethodView):
             if email_err not in content and username_err not in content:
                 raise ex
 
+            if display_name:
+                hyp_client.update_account(username, display_name=display_name)
+
         session['username'] = username
         return redirect(url_for('login'))
 
@@ -59,7 +62,7 @@ def render_template_with_context(template):
     else:
         grant_token = None
 
-    hypothesis_api_url=hypothesis_service+'/api/'
+    hypothesis_api_url = hypothesis_service+'/api/'
 
     return render_template(
         template,
@@ -79,6 +82,7 @@ def logout():
 @app.route('/')
 def index():
     return render_template_with_context('article.html')
+
 
 @app.route('/help')
 def help():
