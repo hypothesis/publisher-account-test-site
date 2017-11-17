@@ -16,13 +16,23 @@
 
   window.hypothesisConfig = function () {
     return {
+      disableToolbarCloseBtn:false,
+      disableToolbarMinimizeBtn: true,
+      disableToolbarHighlightsBtn: true,
+      disableToolbarNewNoteBtn: true,
+      disableBucketBar: true,
+      enableSidebarDropShadow: true,
+      enableExperimentalNewNoteButton: true,
+      enableCleanOnboardingTheme: true,
+      theme: 'clean',
+      usernameUrl: 'http://www.elife.org/user/',
       branding: {
         // Match the body's background color.
-        appBackgroundColor: '#ddd',
+        appBackgroundColor: 'white',
 
         // Match the header's background and foreground colors.
-        accentColor: '#444',
-        ctaBackgroundColor: '#444',
+        accentColor: '#0288d1',
+        ctaBackgroundColor: '#0288d1',
         ctaTextColor: 'white',
 
         // Match the body text of the article.
@@ -33,13 +43,14 @@
         apiUrl: hypothesisApiUrl,
         authority: 'partner.org',
         grantToken: hypothesisGrantToken,
-        icon: 'https://openclipart.org/download/272629/sihouette-animaux-10.svg',
+        icon: 'https://openclipart.org/download/281768/Green-Earth.svg',
         onLoginRequest: openLoginPopup,
         onLogoutRequest: () => window.location = '/logout',
         onSignupRequest: () => openPopup('/signup'),
         onProfileRequest: () => window.location = '/profile',
         onHelpRequest: () => window.location = '/help',
       }],
+      showHighlights: 'whenSidebarOpen',
     };
   };
 
