@@ -16,14 +16,7 @@
 
   window.hypothesisConfig = function () {
     return {
-      disableToolbarCloseBtn:false,
-      disableToolbarMinimizeBtn: true,
-      disableToolbarHighlightsBtn: true,
-      disableToolbarNewNoteBtn: true,
-      disableBucketBar: true,
-      enableSidebarDropShadow: true,
       enableExperimentalNewNoteButton: true,
-      enableCleanOnboardingTheme: true,
       theme: 'clean',
       usernameUrl: 'http://www.elife.org/user/',
       branding: {
