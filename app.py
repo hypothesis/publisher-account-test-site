@@ -8,8 +8,9 @@ from hypothesis import HypothesisClient
 
 app = Flask(__name__)
 app.secret_key = 'notverysecret'
+authority = os.environ['HYPOTHESIS_AUTHORITY']
 hypothesis_service = os.environ.get('HYPOTHESIS_SERVICE', 'http://localhost:5000')
-hyp_client = HypothesisClient(authority=os.environ['HYPOTHESIS_AUTHORITY'],
+hyp_client = HypothesisClient(authority=authority,
                               client_id=os.environ['HYPOTHESIS_CLIENT_ID'],
                               client_secret=os.environ['HYPOTHESIS_CLIENT_SECRET'],
                               jwt_client_id=os.environ['HYPOTHESIS_JWT_CLIENT_ID'],
@@ -66,6 +67,7 @@ def render_template_with_context(template):
 
     return render_template(
         template,
+        authority=authority,
         grant_token=grant_token,
         hypothesis_api_url=hypothesis_api_url,
         username=username,

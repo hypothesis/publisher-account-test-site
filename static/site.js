@@ -34,7 +34,7 @@
       },
       services: [{
         apiUrl: hypothesisApiUrl,
-        authority: 'partner.org',
+        authority: hypothesisAuthority,
         grantToken: hypothesisGrantToken,
         icon: 'https://openclipart.org/download/281768/Green-Earth.svg',
         onLoginRequest: openLoginPopup,
