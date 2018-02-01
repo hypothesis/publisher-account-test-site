@@ -13,3 +13,8 @@ run:
 .PHONY: lint
 lint:
 	flake8
+
+.PHONY: docker
+docker:
+	git archive HEAD | docker build -t hypothesis-publisher-site -
+
