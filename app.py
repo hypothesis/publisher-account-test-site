@@ -6,10 +6,17 @@ from requests.exceptions import HTTPError
 
 from hypothesis import HypothesisClient
 
-app = Flask(__name__)
-app.secret_key = 'notverysecret'
 authority = os.environ['HYPOTHESIS_AUTHORITY']
 hypothesis_service = os.environ.get('HYPOTHESIS_SERVICE', 'http://localhost:5000')
+server_name = os.environ.get('SERVER_NAME', None)
+
+app = Flask(__name__)
+app.secret_key = 'notverysecret'
+if os.environ.get('USE_HTTPS_URLS', False):
+    app.config.update(PREFERRED_URL_SCHEME='https')
+if server_name:
+    app.config.update(SERVER_NAME=server_name)
+
 hyp_client = HypothesisClient(authority=authority,
                               client_id=os.environ['HYPOTHESIS_CLIENT_ID'],
                               client_secret=os.environ['HYPOTHESIS_CLIENT_SECRET'],
