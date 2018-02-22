@@ -49,7 +49,7 @@ In [Hypothesis development environments](http://h.readthedocs.io/en/latest/devel
 
 4. Create the main group for annotations on partner.org
    ```sh
-   ./bin/hypothesis --dev groups add-open-group --authority partner.org --name Partner --creator admin --origin http://localahost:5050
+   ./bin/hypothesis --dev groups add-open-group --authority partner.org --name Partner --creator admin --origin http://localhost:5050
    ```
 
 5. Make sure an instance of https://github.com/hypothesis/client is running with
