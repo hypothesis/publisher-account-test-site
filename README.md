@@ -38,7 +38,7 @@ In [Hypothesis development environments](http://h.readthedocs.io/en/latest/devel
 2. Create another OAuth client on the same page with the type set to
    "jwt_bearer" and the authority also set to "partner.org"
 
-   This will give you a client ID and secret which can be used to generate
+   This will give you an additional client ID and secret pair which can be used to generate
    _grant tokens_ which can be used to identify the logged-in user to the
    Hypothesis client.
 
@@ -49,10 +49,15 @@ In [Hypothesis development environments](http://h.readthedocs.io/en/latest/devel
 
 4. Create the main group for annotations on partner.org
    ```sh
-   ./bin/hypothesis --dev groups add-publisher-group --authority partner.org --name Partner --creator admin
+   ./bin/hypothesis --dev groups add-open-group --authority partner.org --name Partner --creator admin --origin http://localhost:5050
    ```
 
-Once you have a client ID and secret, you can run the test site as follows:
+5. Make sure an instance of https://github.com/hypothesis/client is running with
+   ```sh
+   export SIDEBAR_APP_URL="http://localhost:5000/app.html"
+   ```
+
+Now, you can run the test site as follows:
 
 ```
 pip install -r requirements.txt
