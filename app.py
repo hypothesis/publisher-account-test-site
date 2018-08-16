@@ -34,12 +34,7 @@ class LoginPage(MethodView):
             hyp_client.create_account(username, email=email,
                                       display_name=display_name)
         except HTTPError as ex:
-            # FIXME: Make the service respond with an appropriate status code and
-            # machine-readable error if the user account already exists
-            email_err = 'user with email address {} already exists'.format(email)
-            username_err = 'user with username {} already exists'.format(username)
-            content = ex.response.content
-            if email_err not in content and username_err not in content:
+            if ex.response.status_code != 409:
                 raise ex
 
             if display_name:
