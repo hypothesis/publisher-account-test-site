@@ -1,15 +1,16 @@
-FLASK_PORT=5050
+.PHONY: default
+default: help
 
-ifndef FLASK_HOST
-FLASK_HOST = 127.0.0.1
-endif
+.PHONY: help
+help:
+	@echo "make help              Show this help message"
+	@echo "make dev               Run the app in the development server"
+	@echo "make lint              Run the code linter(s) and print any warnings"
 
-.PHONY: run
-run:
-	export FLASK_APP=app.py; \
-	export FLASK_DEBUG=1; \
-	flask run --port $(FLASK_PORT) --host $(FLASK_HOST)
+.PHONY: dev
+dev:
+	tox -e py27-dev
 
 .PHONY: lint
 lint:
-	flake8
+	tox -e py27-lint

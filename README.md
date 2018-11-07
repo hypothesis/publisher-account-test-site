@@ -60,14 +60,13 @@ In [Hypothesis development environments](http://h.readthedocs.io/en/latest/devel
 Now, you can run the test site as follows:
 
 ```
-pip install -r requirements.txt
 export HYPOTHESIS_SERVICE="http://localhost:5000" # Point to the local H service
 export HYPOTHESIS_AUTHORITY=partner.org  # Domain name used when registering publisher account
 export HYPOTHESIS_CLIENT_ID=$CLIENT_ID
 export HYPOTHESIS_CLIENT_SECRET=$CLIENT_SECRET
 export HYPOTHESIS_JWT_CLIENT_ID=$JWT_CLIENT_ID
 export HYPOTHESIS_JWT_CLIENT_SECRET=$JWT_CLIENT_SECRET
-make run
+make dev
 ```
 
 Once the web app is running:
