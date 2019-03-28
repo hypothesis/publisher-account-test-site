@@ -9,8 +9,8 @@ help:
 
 .PHONY: dev
 dev:
-	tox -e py27-dev
+	tox -q -e py27-dev
 
 .PHONY: lint
 lint:
-	tox -e py27-lint
+	tox -q -e py27-lint
