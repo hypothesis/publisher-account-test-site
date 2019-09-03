@@ -8,9 +8,13 @@ help:
 	@echo "make lint              Run the code linter(s) and print any warnings"
 
 .PHONY: dev
-dev:
+dev: python
 	tox -q -e py27-dev
 
 .PHONY: lint
-lint:
+lint: python
 	tox -q -e py27-lint
+
+.PHONY: python
+python:
+	@./bin/install-python
