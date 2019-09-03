@@ -41,7 +41,7 @@ process:
 
 ### Create auth clients, groups and users in h
 
-You need to create a couple of things in the Hypothesis service:
+You need to create a few things in the Hypothesis service:
 
 1. A set of credentials (a "client credentials" OAuth client) for managing users
    and groups associated with your domain.
