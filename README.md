@@ -39,57 +39,17 @@ process:
 
     cd publisher-account-test-site
 
-### Create auth clients, groups and users in h
+### Create the development data and settings
 
-You need to create a few things in the Hypothesis service:
+Create the database contents and environment variable settings needed to get
+publisher-account-test-site working nicely with your local development
+instances of the rest of the Hypothesis apps:
 
-1. A set of credentials (a "client credentials" OAuth client) for managing users
-   and groups associated with your domain.
+    make devdata
 
-2. A set of credentials (a "JWT bearer" OAuth client) for creating signed tokens that
-   the Hypothesis client can use to automatically log in as a particular user.
-
-3. A group associated with your domain to which users can post annotations.
-   Annotations from this group will be displayed when the Hypothesis client
-   loads on your pages.
-
-In [Hypothesis development environments](http://h.readthedocs.io/en/latest/developing/install/), you can do this using the `hypothesis` CLI tool:
-
-1. Go to http://localhost:5000/admin/oauthclients and create a new OAuth client
-   with the type set to "client_credentials" and the authority set to "partner.org".
-
-   This will give you a client ID and secret which can be used to create
-   accounts on the Hypothesis service via the API.
-
-2. Create another OAuth client on the same page with the type set to
-   "jwt_bearer" and the authority also set to "partner.org"
-
-   This will give you an additional client ID and secret pair which can be used to generate
-   _grant tokens_ which can be used to identify the logged-in user to the
-   Hypothesis client.
-
-3. Create an admin user for partner.org:
-   ```sh
-   ./bin/hypothesis --dev user add --authority partner.org --username admin --email admin@localhost --password secret
-   ```
-
-4. Create the main group for annotations on partner.org
-   ```sh
-   ./bin/hypothesis --dev groups add-open-group --authority partner.org --name Partner --creator admin --origin http://localhost:5050
-   ```
-
-### Set environment variables
-
-The publisher account test site requires several environment variables to be
-set. Set the following environment variables in your shell:
-
-    export HYPOTHESIS_SERVICE="http://localhost:5000" # Point to the local H service
-    export HYPOTHESIS_AUTHORITY=partner.org  # Domain name used when registering publisher account
-    export HYPOTHESIS_CLIENT_ID=$CLIENT_ID
-    export HYPOTHESIS_CLIENT_SECRET=$CLIENT_SECRET
-    export HYPOTHESIS_JWT_CLIENT_ID=$JWT_CLIENT_ID
-    export HYPOTHESIS_JWT_CLIENT_SECRET=$JWT_CLIENT_SECRET
-
+This requires you to have a git SSH key set up that has access to the private
+https://github.com/hypothesis/devdata repo. Otherwise `make devdata` will
+crash.
 
 ### Start the development server
 
