@@ -9,15 +9,15 @@ help:
 
 .PHONY: dev
 dev: python
-	tox -q -e py36-dev
+	tox -q
 
 .PHONY: devdata
 devdata: python
-	@tox -q -e py36-dev -- python bin/devdata.py
+	@tox -q  -- python bin/devdata.py
 
 .PHONY: lint
 lint: python
-	tox -q -e py36-lint
+	tox -qe lint
 
 .PHONY: python
 python:
