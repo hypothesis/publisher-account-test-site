@@ -5,10 +5,6 @@ This is a web app to test how content publishers can use
 functionality to their pages which is integrated with their existing account
 system.
 
-Note that this is only intended for us at Hypothesis to test the integration
-functionality internally, it's not intended as a demo or example for
-publishers.
-
 Publishers who just want to add the Hypothesis client to their pages and allow users to annotate using Hypothesis accounts can simply [embed Hypothesis](https://hypothes.is/for-publishers/).
 
 ## Installing the publisher account test site in a development environment
